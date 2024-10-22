@@ -9,15 +9,11 @@ package com.linked_list_music_template;
 
 
 //importing the JMusic stuff
-import jm.music.data.*;
-import jm.util.*;
-//import FileSystem for cross-platform file referencing
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.util.ArrayList;
 
-//Processing import
-import processing.core.*;
+import processing.core.PApplet;
 
 
 //make sure this class name matches your file name, if not fix.
@@ -34,6 +30,9 @@ public class App extends PApplet {
     //all the objects that implement a draw
     ArrayList<Drawable> draws = new ArrayList<>(); 
 
+    LinkedListMelodyManager manager = new LinkedListMelodyManager();
+    LinkedListMelody melody = new LinkedListMelody();
+
     public static void main(String[] args) {
         PApplet.main("com.linked_list_music_template.App");       
     }
@@ -42,8 +41,29 @@ public class App extends PApplet {
     public void settings()
     {
         size(500, 500);
+        manager.setup();
+        addNodes();
         setupButtons();
+        addMelodyDraw();
         //in another function, setup your linked list and add it to the draws.
+    }
+
+    //adds the drawable melody objects to the draws array to call their draw() ie update()
+    public void addMelodyDraw()
+    {
+        draws.add( melody );
+        draws.add( manager );
+    }
+
+    /*
+     * Tests the MelodyLinkedList by adding all the files
+     */
+    void addNodes()
+    {   
+        for(int i = 0; i < manager.size(); i++)
+        {
+            melody.insertAtEnd( new MelodyNode(manager, i) );
+        }
     }
 
     //create & add your buttons to presses & draws 
@@ -78,6 +98,13 @@ public class App extends PApplet {
         }
     }
 
+    /*
+     * USED ONLY FOR TESTING!
+     */
+    public void keyPressed()
+    {
+        melody.start();
+    }
 
 }
  
