@@ -15,14 +15,15 @@ public class LinkedListMelody implements Drawable {
     public LinkedListMelody() //constructor.
     {
         head = null;
+        curPlayingNode = null;
     }
 
 
-    //fill in this class
+    //fill in this class *****************************
     public void draw()
     {
-        //fill this in to play melody
-    }
+
+    }//end of draw()
 
     MelodyNode curMelodyNode = null; //init to nothing bc nothings playing at the start.
 
@@ -31,10 +32,10 @@ public class LinkedListMelody implements Drawable {
     {
         if(head != null)
         {
-            curMelodyNode = head;
+            curPlayingNode = head;
             head.start();
         }
-    }
+    }//end of start()
 
     /*
      * Prints all the foods in a list.
@@ -52,11 +53,11 @@ public class LinkedListMelody implements Drawable {
         while (current != null)
             { //While not the end of the list
                 
-                System.out.print(" " + current.toString()); //print data
+                System.out.print(" " + current.getWhichMelody()); //print data
                 
                 current = current.getNextMelodyNode(); //go to next node
             }
-            System.out.println(""); 
+            System.out.println(" "); 
         
     } //end of print()
 
@@ -126,5 +127,110 @@ public class LinkedListMelody implements Drawable {
             current.setNextMelodyNode(node);
         }
     }//end of insertAtEnd()
+
+
+    /*
+     * This is the play method, it goes through all the Nodes and plays them!
+     */
+    public void play()
+    {
+        curPlayingNode = head;
+        while(curPlayingNode != null)
+        {
+            curPlayingNode.start();
+            curPlayingNode = curPlayingNode.getNextMelodyNode();
+        }
+    }//end of play()
+
+
+    /*
+     * This is the stop method, it stops playing the melodies.
+     */
+    public void stop()
+    {
+        curPlayingNode = null;
+        System.out.println("Stopped playing Melodies.");
+    }//end of stop()
+
+    
+    /*
+     * Loops the melody & also stops the loop.
+     */
+    public void loop(boolean loop)
+    {
+        if(loop && head != null)
+        {
+            curPlayingNode = head;
+            while(curPlayingNode != null)
+            {
+                curPlayingNode.start();
+                curPlayingNode = curPlayingNode.getNextMelodyNode();
+                if(curPlayingNode == null)
+                {
+                    curPlayingNode = head; 
+                }
+            }
+        }
+        else{
+            stop();
+        }
+    }//end of loop()
+
+    
+    /*
+     * Weave the input melodyNode count times every skip nodes.
+     */
+    public void weave(MelodyNode node, int count, int skip)
+    {
+        MelodyNode current = head;
+        int currentIndex = 0;
+        int weave = 0;
+        while(current != null && weave < count)
+        {
+            if(currentIndex % (skip + 1) == skip)
+            {
+                MelodyNode copyNode = node.copy();
+                copyNode.setNextMelodyNode(node);
+                current = copyNode;
+                weave++;
+            }
+            current = current.getNextMelodyNode();
+            currentIndex++;
+        }
+    }//end of weave()
+
+
+    /*
+     * TWO OTHER METHODS BELOW:
+     * ------------------------------------------------
+     */
+
+     /*
+      * Clear method: this clears the List by setting both nodes to be null.
+      */
+      public void clear()
+      {
+        head = null;
+        curPlayingNode = null;
+      }
+
+      /*
+       * Reverse method: Reverses the List!
+       */
+      public void reverse()
+      {
+        MelodyNode previous = null;//set the previous node to be null.
+        MelodyNode current = head; //set the current node to be the head node.
+        MelodyNode next = null;    //set the next node to be null.
+
+        while(current != null) //while loop to go through the list.
+        {
+            next = current.getNextMelodyNode(); 
+            current.setNextMelodyNode(previous); //set current node to previous node
+            previous = current;
+            current = next;
+        }
+        head = previous;
+      }
 
 }

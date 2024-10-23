@@ -12,9 +12,10 @@ public class MelodyNode {
     MelodyNode nextMelodyNode; //next node in the list
     int whichMelody; //which melody to play (indexes the MelodyManager class)
     
-    public MelodyNode(MelodyManager melodies, int m_) //constructor
+    public MelodyNode(MelodyManager melodies_, int m_) //constructor
     {
-        this.whichMelody = m_;
+        melodies = melodies_;
+        whichMelody = m_;
         nextMelodyNode = null;
     }
 
@@ -33,27 +34,38 @@ public class MelodyNode {
         this.nextMelodyNode = node;
      }
 
+     
+     /*
+     * Getters & Setters for whichMelody
+     */
+    public int getWhichMelody()
+    {
+      return whichMelody;
+    }
+
+    public void setWhichMelody(int newWhichMelody)
+    {
+      whichMelody = newWhichMelody;
+    }
+     
 
      /*
       * This method starts the melody to start playing.
       */
      public void start()
      {
-        melodies.start(whichMelody);
+      if(melodies != null)
+      {
+         melodies.start(whichMelody);
+      }
      }
 
      /*
       * This method brings in a new MelodyNode and creates a copy of it.
       */
-     public MelodyNode copy(MelodyNode node)
+     public MelodyNode copy()
      {
-        // MelodyNode copyMelodyNode = new MelodyNode();
-        // MelodyNode copyMelodyNode; 
-        // copyMelodyNode = getNextMelodyNode();
-        
-        MelodyNode copyMelodyNode = node;
-
-        return copyMelodyNode;
+        return new MelodyNode(this.melodies, this.whichMelody);
      }
 
 
