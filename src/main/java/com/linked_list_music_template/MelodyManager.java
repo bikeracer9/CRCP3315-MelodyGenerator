@@ -63,4 +63,9 @@ public class MelodyManager {
         players.get(index).reset();
     }
 
+    boolean atEnd(int index)
+    {
+       return players.get(index).atEndOfMelody();
+    }
+
 }

@@ -3,6 +3,7 @@
 * Class: Main Class for Hello World for CC3 Class Projects streaming MIDI, etc.
 * Description: Demonstration of MIDI file manipulations, etc. & 'MelodyPlayer' sequencer, 2024 - add processing/interactivity
 * 
+* Test Weave Functions are called in this class in the settings() method.
 */
 
 package com.linked_list_music_template;
@@ -33,6 +34,7 @@ public class App extends PApplet {
     LinkedListMelodyManager manager = new LinkedListMelodyManager();
     LinkedListMelody melody = new LinkedListMelody();
 
+
     public static void main(String[] args) {
         PApplet.main("com.linked_list_music_template.App");       
     }
@@ -45,7 +47,8 @@ public class App extends PApplet {
         addNodes();
         setupButtons();
         addMelodyDraw();
-        //in another function, setup your linked list and add it to the draws.
+        //TEST WEAVE FUNCTIONS BELOW: (uncomment these out!) *******
+        
     }
 
     //adds the drawable melody objects to the draws array to call their draw() ie update()
@@ -70,9 +73,36 @@ public class App extends PApplet {
     public void setupButtons()
     {
         //helpful variables for formatting -- use or not. if you don't use, delete.
-        float centerX = width/2; 
-        float centerY = height/2; 
-        float spacer = 8;
+        float X_bR = width-100; 
+        float Y_bR = 350; 
+        float spacer = 35;
+
+        float X_tL = 95; 
+        float Y_tL = 35; 
+
+        //Buttons on the bottom right below:
+        PlayButton playB = new PlayButton(this, melody, X_bR, Y_bR);
+        draws.add(playB);
+        presses.add(playB);
+
+        StopButton stopB = new StopButton(this, melody, X_bR, (playB.y + spacer) );
+        draws.add(stopB);
+        presses.add(stopB);
+
+        LoopTrueButton loopTrueB = new LoopTrueButton(this, melody, X_bR, (stopB.y + spacer) );
+        draws.add(loopTrueB);
+        presses.add(loopTrueB);
+
+        LoopFalseButton loopFalseB = new LoopFalseButton(this, melody, X_bR, (loopTrueB.y + spacer) );
+        draws.add(loopFalseB);
+        presses.add(loopFalseB);
+        //--------
+
+        //Buttons on the top left below:
+        TestWeaveButton testWeaveB = new TestWeaveButton(this, melody, X_tL, Y_tL);
+        draws.add(testWeaveB);
+        presses.add(testWeaveB);
+        //--------
     }
 
     //doing all the setup stuff for Processing
@@ -96,14 +126,6 @@ public class App extends PApplet {
         {
             press.mousePressed(mouseX, mouseY);
         }
-    }
-
-    /*
-     * USED ONLY FOR TESTING!
-     */
-    public void keyPressed()
-    {
-        melody.start();
     }
 
 }

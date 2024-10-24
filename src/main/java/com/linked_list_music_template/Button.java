@@ -12,7 +12,7 @@
 
 package com.linked_list_music_template;
 
-import processing.core.*;
+import processing.core.PApplet;
 
 public abstract class Button implements OnMousePress, Drawable {
     PApplet main; //access to Processing
@@ -49,7 +49,7 @@ public abstract class Button implements OnMousePress, Drawable {
     }
 
     //overload the constructor for default sizes 150 x 25
-    Button(PApplet main_, String label_,float x_, float y_)
+    Button(PApplet main_, String label_, float x_, float y_)
     {
         this(main_, label_, x_, y_, 150, 25, main_.color(255)); 
     }

@@ -22,7 +22,9 @@ public class LinkedListMelody implements Drawable {
     //fill in this class *****************************
     public void draw()
     {
-
+        play();
+        //loop(true);
+        //loop(false);
     }//end of draw()
 
     MelodyNode curMelodyNode = null; //init to nothing bc nothings playing at the start.
@@ -134,11 +136,16 @@ public class LinkedListMelody implements Drawable {
      */
     public void play()
     {
-        curPlayingNode = head;
-        while(curPlayingNode != null)
+        if( curPlayingNode != null )
         {
-            curPlayingNode.start();
-            curPlayingNode = curPlayingNode.getNextMelodyNode();
+            if( curPlayingNode.atEnd() )
+            {
+                curPlayingNode = curPlayingNode.getNextMelodyNode();
+                if(curPlayingNode != null)
+                {
+                    curPlayingNode.start();
+                }
+            }
         }
     }//end of play()
 
@@ -158,22 +165,56 @@ public class LinkedListMelody implements Drawable {
      */
     public void loop(boolean loop)
     {
-        if(loop && head != null)
+        System.out.println("LOOP ON!"); //test
+
+        if((curPlayingNode != null) && (loop))
         {
-            curPlayingNode = head;
-            while(curPlayingNode != null)
-            {
-                curPlayingNode.start();
-                curPlayingNode = curPlayingNode.getNextMelodyNode();
-                if(curPlayingNode == null)
-                {
-                    curPlayingNode = head; 
-                }
-            }
+
         }
-        else{
-            stop();
-        }
+
+        // if(loop)
+        // {
+        //     System.out.println("Loop = True");
+        //     while(loop == true)
+        //     {
+        //         play();
+        //         if(curPlayingNode == null)
+        //         {
+        //             curPlayingNode = head;
+        //         }
+        //         if(loop == false)
+        //         {
+        //             System.out.println("Loop = False, Stopped playing.");
+        //             stop();
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     System.out.println("Loop = False, Stopped playing.");
+        // }   
+        
+        
+        // if(loop == true)
+        // {
+        //     System.out.println("Loop = True");
+        //     while(curPlayingNode != null)
+        //     {
+        //         play();
+        //     }
+            
+        //     if(curPlayingNode == null)
+        //     {
+        //         curPlayingNode = head;
+        //     }
+        // }
+        // else
+        // {
+        //     System.out.println("Loop = False");
+        //     stop();
+        // }
+
+
     }//end of loop()
 
     
@@ -182,6 +223,26 @@ public class LinkedListMelody implements Drawable {
      */
     public void weave(MelodyNode node, int count, int skip)
     {
+        /*
+         * Weave the input melodyNode count times every skip nodes. 
+         * Do no go over the edge of the list.
+         * 
+         * weave(node, 3, 4);
+         * Melody: 3, 3, 3, 0, 3, 3, 3, 0, 3, 3, 3, 0, 3, 3, 3, 0
+         */
+        
+        //  MelodyNode current = node;
+        // int currentIndex = 0;
+        // int weave = 0; 
+        // while(current != null && weave < count)
+        // {
+        //     if( (currentIndex % (skip+1) == 0)  //4 % 4 = 0
+        //     {
+
+        //     }
+        // }
+
+
         MelodyNode current = head;
         int currentIndex = 0;
         int weave = 0;

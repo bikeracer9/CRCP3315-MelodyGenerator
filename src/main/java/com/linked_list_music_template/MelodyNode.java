@@ -34,7 +34,7 @@ public class MelodyNode {
         this.nextMelodyNode = node;
      }
 
-     
+
      /*
      * Getters & Setters for whichMelody
      */
@@ -66,6 +66,12 @@ public class MelodyNode {
      public MelodyNode copy()
      {
         return new MelodyNode(this.melodies, this.whichMelody);
+     }
+
+     //Checks to see if you're at the end of the melody, based off of MelodyManager
+     boolean atEnd()
+     {
+      return melodies.atEnd(whichMelody);
      }
 
 
