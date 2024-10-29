@@ -1,3 +1,8 @@
+/*
+ * Prescott Lau -- based on Courtney Brown's vimeo videos & code
+ * October 28th 2024
+ * This class manages the LinkedListMelody and manages the files!
+ */
 package com.linked_list_music_template;
 
 import java.nio.file.FileSystem;
@@ -10,7 +15,7 @@ public class LinkedListMelodyManager extends MelodyManager implements Drawable {
     static String prependPath = "mid"  + sys.getSeparator();
     static String appendType = ".mid"  + sys.getSeparator();
 
-    String[] files = {"motive1Am", "motive1E", "motive2Am", "motive2E", "motive3Am", "motive3E"};
+    String[] files = {"motive1Am", "motive1E", "motive2Am", "motive2E", "motive3Am", "motive3E", "motive4Am", "motive4E"};
 
     LinkedListMelodyManager()
     {

@@ -11,6 +11,12 @@
  * LoopTrueButton -- turns ON the loop() function to loop the MelodyLinkedList.
  * LoopFalseButton-- turns OFF the loop() function to STOP looping the MelodyLinkedList.
  * TestWeaveButton: calls the WeaveUnitTest Class and tests the two weave methods.
+ * addMelody1Button: adds "Melody 1" to the Melody Class to be able to play.
+ * weave_3_4_Button: Weaves melody 4 every 3 nodes.
+ * weave_2_1_Button: Weaves melody 1 every 2 nodes.
+ * weave_5_3_Button: Weaves melody 5 every 3 nodes.
+ * clearListButton: Clears the list!
+ * reverseListButton: Reverses the list
  */
 package com.linked_list_music_template;
 
@@ -77,6 +83,10 @@ class StopButton extends MelodyButton{
     public void onPress()
     {
         melody.stop();
+        if(melody.drawLoop)
+        {
+            melody.drawLoop = false;
+        }
     }
 }
 
@@ -121,7 +131,11 @@ class LoopFalseButton extends MelodyButton{
     //Start playing the Melody
     public void onPress()
     {
-        melody.loop(false);
+        melody.stop();
+        if(melody.drawLoop)
+        {
+            melody.drawLoop = false;
+        }
     }
 }
 
@@ -148,3 +162,135 @@ class TestWeaveButton extends MelodyButton{
     }
 }
 
+
+/*
+ * --------
+ * addMelody1Button: adds "Melody 1" to the Melody Class to be able to play.
+ * --------
+ */
+class addMelody1Button extends MelodyButton{
+
+    //overload the constructor for the MelodyButon -- use the default size for height & width & color.
+    addMelody1Button(PApplet main_, LinkedListMelody melody_, float x_, float y_)
+    {
+        super(main_, melody_, "Add Melody 1:", x_, y_); 
+    }
+
+    //Test the WeaveUnitTests
+    public void onPress()
+    {
+        melody.addMelody1();
+        melody.play();
+    }
+}
+
+
+
+/*
+ * --------
+ * weave_3_4_Button: Weaves melody 4 every 3 nodes.
+ * --------
+ */
+class weave_3_4_Button extends MelodyButton{
+
+    //overload the constructor for the MelodyButon -- use the default size for height & width & color.
+    weave_3_4_Button(PApplet main_, LinkedListMelody melody_, float x_, float y_)
+    {
+        super(main_, melody_, "Weave(3,4)", x_, y_); 
+    }
+
+    //Test the WeaveUnitTests
+    public void onPress()
+    {
+        MelodyNode node = new MelodyNode(null, 0);
+        melody.weave(node, 3,4);
+    }
+}
+
+
+/*
+ * --------
+ * weave_2_1_Button: Weaves melody 1 every 2 nodes.
+ * --------
+ */
+class weave_2_1_Button extends MelodyButton{
+
+    //overload the constructor for the MelodyButon -- use the default size for height & width & color.
+    weave_2_1_Button(PApplet main_, LinkedListMelody melody_, float x_, float y_)
+    {
+        super(main_, melody_, "Weave(2,1)", x_, y_); 
+    }
+
+    //Test the WeaveUnitTests
+    public void onPress()
+    {
+        MelodyNode node = new MelodyNode(null, 0);
+        melody.weave(node, 2,1);
+    }
+}
+
+
+/*
+ * --------
+ * weave_5_3_Button: Weaves melody 5 every 3 nodes.
+ * --------
+ */
+class weave_5_3_Button extends MelodyButton{
+
+    //overload the constructor for the MelodyButon -- use the default size for height & width & color.
+    weave_5_3_Button(PApplet main_, LinkedListMelody melody_, float x_, float y_)
+    {
+        super(main_, melody_, "Weave(5,3)", x_, y_); 
+    }
+
+    //Test the WeaveUnitTests
+    public void onPress()
+    {
+        MelodyNode node = new MelodyNode(null, 0);
+        melody.weave(node, 5,3);
+    }
+}
+
+
+
+/*
+ * --------
+ * clearListButton: Clears the list!
+ * --------
+ */
+class clearListButton extends MelodyButton{
+
+    //overload the constructor for the MelodyButon -- use the default size for height & width & color.
+    clearListButton(PApplet main_, LinkedListMelody melody_, float x_, float y_)
+    {
+        super(main_, melody_, "Clear List:", x_, y_); 
+    }
+
+    //Test the WeaveUnitTests
+    public void onPress()
+    {
+        melody.clear();
+        melody.print();
+    }
+}
+
+/*
+ * --------
+ * reverseListButton: Reverses the list
+ * --------
+ */
+class reverseListButton extends MelodyButton{
+
+    //overload the constructor for the MelodyButon -- use the default size for height & width & color.
+    reverseListButton(PApplet main_, LinkedListMelody melody_, float x_, float y_)
+    {
+        super(main_, melody_, "Reverse List:", x_, y_); 
+    }
+
+    //Test the WeaveUnitTests
+    public void onPress()
+    {
+        melody.reverse();
+        melody.print();
+    }
+}

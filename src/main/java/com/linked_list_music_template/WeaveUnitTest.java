@@ -1,3 +1,8 @@
+/*
+ * Prescott Lau
+ * October 24th 2024
+ * Tests the weave function.
+ */
 package com.linked_list_music_template;
 
 public class WeaveUnitTest {
@@ -16,13 +21,13 @@ public class WeaveUnitTest {
             melodyList.insertAtEnd( new MelodyNode(manager, 3));
         }
         
-        MelodyNode node = melodyList.head;
+        MelodyNode node = new MelodyNode(manager, 0);
         melodyList.weave(node, 3,4);
         melodyList.print();
 
         System.out.println("--------------------------");
         
-    }
+    }//end testWeave1()
 
 
     void testWeave2() 
@@ -37,11 +42,11 @@ public class WeaveUnitTest {
             melodyList.insertAtEnd( new MelodyNode(manager, 3));
         }
 
-        MelodyNode node = melodyList.head;
+        MelodyNode node = new MelodyNode(manager, 0);
         melodyList.weave(node, 5, 10);
 
         melodyList.print();
 
         System.out.println("--------------------------");
-    }
+    }//end testWeave2()
 }

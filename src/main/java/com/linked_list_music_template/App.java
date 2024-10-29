@@ -4,6 +4,10 @@
 * Description: Demonstration of MIDI file manipulations, etc. & 'MelodyPlayer' sequencer, 2024 - add processing/interactivity
 * 
 * Test Weave Functions are called in this class in the settings() method.
+* 
+* Prescott Lau - based on Courtney Brown's code & vimeo videos
+* October 28th 2024
+* 
 */
 
 package com.linked_list_music_template;
@@ -34,7 +38,6 @@ public class App extends PApplet {
     LinkedListMelodyManager manager = new LinkedListMelodyManager();
     LinkedListMelody melody = new LinkedListMelody();
 
-
     public static void main(String[] args) {
         PApplet.main("com.linked_list_music_template.App");       
     }
@@ -47,7 +50,7 @@ public class App extends PApplet {
         addNodes();
         setupButtons();
         addMelodyDraw();
-        //TEST WEAVE FUNCTIONS BELOW: (uncomment these out!) *******
+        
         
     }
 
@@ -79,6 +82,7 @@ public class App extends PApplet {
 
         float X_tL = 95; 
         float Y_tL = 35; 
+        float spacer2 = 60;
 
         //Buttons on the bottom right below:
         PlayButton playB = new PlayButton(this, melody, X_bR, Y_bR);
@@ -99,9 +103,37 @@ public class App extends PApplet {
         //--------
 
         //Buttons on the top left below:
+
+        //test weave function:
         TestWeaveButton testWeaveB = new TestWeaveButton(this, melody, X_tL, Y_tL);
         draws.add(testWeaveB);
         presses.add(testWeaveB);
+
+        addMelody1Button addMelody1B = new addMelody1Button(this, melody, X_tL, (testWeaveB.y + spacer2));
+        draws.add(addMelody1B);
+        presses.add(addMelody1B);
+
+        weave_3_4_Button weave_3_4_B = new weave_3_4_Button(this, melody, X_tL, (addMelody1B.y + spacer));
+        draws.add(weave_3_4_B);
+        presses.add(weave_3_4_B);
+
+        weave_2_1_Button weave_2_1_B = new weave_2_1_Button(this, melody, X_tL, (weave_3_4_B.y + spacer));
+        draws.add(weave_2_1_B);
+        presses.add(weave_2_1_B);
+
+        weave_5_3_Button weave_5_3_B = new weave_5_3_Button(this, melody, X_tL, (weave_2_1_B.y + spacer));
+        draws.add(weave_5_3_B);
+        presses.add(weave_5_3_B);
+
+        clearListButton clearListB = new clearListButton(this, melody, X_tL, (weave_5_3_B.y + spacer));
+        draws.add(clearListB);
+        presses.add(clearListB);
+
+        reverseListButton reverseListB = new reverseListButton(this, melody, X_tL, (clearListB.y + spacer));
+        draws.add(reverseListB);
+        presses.add(reverseListB);
+        
+        
         //--------
     }
 
